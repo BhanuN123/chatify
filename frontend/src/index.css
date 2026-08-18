@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+:root {
+  /* Base ink surfaces — cool graphite, not pure black */
+  --bg: #0d0e13;
+  --bg-canvas: #0a0b0f;
+  --surface: #14161d;
+  --surface-raised: #1a1c25;
+  --surface-overlay: #20222c;
+  --surface-hover: #22242f;
+  --border: #262835;
+  --border-strong: #35374530;
+
+  /* Type */
+  --text-primary: #eef0f5;
+  --text-secondary: #9296a6;
+  --text-tertiary: #62667a;
+  --text-inverse: #0d0e13;
+
+  /* Signature accent — "signal indigo" */
+  --accent: #5b6ef5;
+  --accent-hover: #6d7ef8;
+  --accent-active: #4a5ce0;
+  --accent-soft: rgba(91, 110, 245, 0.14);
+
+  /* Functional signals */
+  --signal-online: #34d399;
+  --signal-amber: #ffb454;
+  --signal-danger: #f2564e;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #35374580;
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #454859a0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Shared component-level utility classes */
+@layer components {
+  .field {
+    @apply w-full bg-surface-raised border border-border rounded-xl py-2.5 pl-11 pr-4 text-[15px] text-ink-primary placeholder-ink-tertiary
+      transition-colors duration-150 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-soft;
+  }
+
+  .field-icon {
+    @apply pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 size-4.5 text-ink-tertiary;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white
+      shadow-soft transition-all duration-150 hover:bg-accent-hover active:bg-accent-active active:scale-[0.98]
+      disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-ink-secondary
+      transition-colors duration-150 hover:bg-surface-hover hover:text-ink-primary;
+  }
+
+  .icon-btn {
+    @apply inline-flex items-center justify-center rounded-lg text-ink-tertiary transition-all duration-150
+      hover:bg-surface-hover hover:text-ink-primary active:scale-95;
+  }
+
+  .pill-tab {
+    @apply relative flex-1 rounded-lg px-3 py-1.5 text-[13px] font-medium transition-colors duration-150;
+  }
+
+  .surface-card {
+    @apply bg-surface-raised border border-border rounded-2xl;
+  }
+}
